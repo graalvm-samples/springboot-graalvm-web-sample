@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="service_name" source="spring.application.name"/>
+    <springProperty scope="context" name="log_path" source="logging.logback.path"/>
+    <springProperty scope="context" name="project_version" source="project.version" defaultvalue="0.0.0"/>
+    <springProperty scope="context" name="log_gz" source="logging.logback.gz"/>
+
+    <logger name="net.ttddyy.dsproxy" level="OFF" />
+
+    <property name="MY_CONSOLE_LOG_PATTERN"
+              value="${MY_CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) [%X{request_id:- }] [${service_name}] [${project_version}] %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${MY_CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <springProfile name="local,dev,test,test_2,stage,stage_2,stage_3">
+        <!-- 打印sql -->
+        <root level="INFO">
+<!--            <appender-ref ref="INFO_FILE"/>-->
+<!--            <appender-ref ref="WARN_FILE"/>-->
+<!--            <appender-ref ref="ERROR_FILE"/>　-->
+            <appender-ref ref="CONSOLE"/>
+        </root>
+
+    </springProfile>
+
+</configuration>

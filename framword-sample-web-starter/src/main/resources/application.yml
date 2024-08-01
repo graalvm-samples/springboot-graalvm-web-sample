@@ -1,0 +1,216 @@
+# DataSource Config
+
+spring:
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: web-sample
+  profiles:
+    active: default,local
+#  web:
+#    resources:
+#      add-mappings: false
+#  mvc:
+#    favicon:
+#      enabled: false
+  # redis 配置
+  data:
+    redis:
+      database: 0
+      # 地址
+      host: 192.168.199.199
+      # 端口，默认为6379
+      port: 6379
+      # 密码
+      password: 123456
+      # 连接超时时间
+      timeout: 10s
+      lettuce:
+        pool:
+          # 连接池中的最小空闲连接
+          min-idle: 0
+          # 连接池中的最大空闲连接
+          max-idle: 8
+          # 连接池的最大数据库连接数
+          max-active: 8
+          # #连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+  datasource:
+    druid:
+      first:
+        url: jdbc:mysql://192.168.199.199:3306/test?serverTimezone=Asia/Shanghai&autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+        aop-patterns: com.alibaba.druid.spring.boot.demo.service.*
+        async-close-connection-enable: true
+        filters: slf4j,stat
+        filter:
+          slf4j:
+            enabled: true
+            statementExecuteAfterLogEnable: false
+            statementCloseAfterLogEnable: false
+            connectionCloseAfterLogEnable: false
+            statementPrepareAfterLogEnable: false
+            statementPrepareCallAfterLogEnable: false
+            statementParameterSetLogEnable: false
+            statementCreateAfterLogEnable: false
+            statementLogEnabled: false
+            statementExecutableSqlLogEnable: true
+            statementExecuteQueryAfterLogEnable: false
+            connectionCloseAfterLogEnabled: false
+            statementParameterClearLogEnable: false
+            StatementParameterSetLogEnabled: false
+            StatementCloseAfterLogEnabled: false
+            StatementExecuteAfterLogEnabled: false
+            statementLogErrorEnabled: true
+            resultSetLogEnabled: false
+          stat:
+            db-type: h2
+            enabled: true
+            log-slow-sql: true
+            slow-sql-millis: 2000
+        initial-size: 2
+        max-active: 30
+        max-pool-prepared-statement-per-connection-size: 5
+        max-wait: 1234
+        min-evictable-idle-time-millis: 30001
+        min-idle: 2
+        pool-prepared-statements: true
+        stat-view-servlet:
+          enabled: true
+        test-on-borrow: true
+        test-on-return: true
+        test-while-idle: true
+        time-between-eviction-runs-millis: 10000
+        validation-query: NULL
+        validation-query-timeout: 1
+        web-stat-filter:
+          enabled: true
+      second:
+        url: jdbc:mysql://192.168.199.199:3306/demo?serverTimezone=Asia/Shanghai&autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        aop-patterns: com.alibaba.druid.spring.boot.demo.service.*
+        async-close-connection-enable: true
+        filters: slf4j,stat
+        filter:
+          slf4j:
+            enabled: true
+            statementExecuteAfterLogEnable: false
+            statementCloseAfterLogEnable: false
+            connectionCloseAfterLogEnable: false
+            statementPrepareAfterLogEnable: false
+            statementPrepareCallAfterLogEnable: false
+            statementParameterSetLogEnable: false
+            statementCreateAfterLogEnable: false
+            statementLogEnabled: false
+            statementExecutableSqlLogEnable: true
+            statementExecuteQueryAfterLogEnable: false
+            connectionCloseAfterLogEnabled: false
+            statementParameterClearLogEnable: false
+            StatementParameterSetLogEnabled: false
+            StatementCloseAfterLogEnabled: false
+            StatementExecuteAfterLogEnabled: false
+            statementLogErrorEnabled: true
+            resultSetLogEnabled: false
+          stat:
+            db-type: h2
+            enabled: true
+            log-slow-sql: true
+            slow-sql-millis: 2000
+        initial-size: 2
+        max-active: 30
+        max-pool-prepared-statement-per-connection-size: 5
+        max-wait: 1234
+        min-evictable-idle-time-millis: 30001
+        min-idle: 2
+        pool-prepared-statements: true
+        stat-view-servlet:
+          enabled: true
+        test-on-borrow: true
+        test-on-return: true
+        test-while-idle: true
+        time-between-eviction-runs-millis: 10000
+        validation-query: NULL
+        validation-query-timeout: 1
+        web-stat-filter:
+          enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+  main:
+    # 会影响 mvn -Pnative -DskipTests spring-boot:build-image 打包卡死
+    keep-alive: false
+    allow-bean-definition-overriding: true
+#  sql:
+#    init:
+#      schema-locations: classpath:db/schema-h2.sql
+#      data-locations: classpath:db/data-h2.sql
+#      mode: always
+
+# Logger Config
+logging:
+  level:
+#    root: debug
+    druid.sql.Statement: debug
+    com.baomidou.mybatisplus.samples.quickstart: debug
+#    druid:
+#      sql:
+#        Statement: DEBUG
+#mybatis-plus:
+#  type-aliases-package: com.example2.demo4.entity
+#  mapper-locations: classpath:/mapper/*Mapper.xml
+
+
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌密钥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime: 30
+
+# 项目相关配置
+project:
+  # 名称
+  name: perry
+  # 版本
+  version: 2.0.0.1
+  # 版权年份
+  copyrightYear: 2019
+  # 实例演示开关
+  demoEnabled: true
+  # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
+  profile: D:/ruoyi/uploadPath
+  # 获取ip地址开关
+  addressEnabled: true
+
+
+# 忽略url
+ignored:
+  noLoginVerification:
+    - /druid/**
+    - /oauth/*
+    - /captchaImage
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /swagger/**
+    - /v2/api-docs
+    - /**.js
+    - /**.css
+    - /**.png
+    - /**.ico
+    - /webjars/**
+    - /swagger-resources/**
+    - /csrf
+    - /anonymous/**
+  urls:
+    - /admin/login
+    - /anonymous/**
+#debug: true

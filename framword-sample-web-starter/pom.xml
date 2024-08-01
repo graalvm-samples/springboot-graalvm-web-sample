@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>framework-sample-web</artifactId>
+        <groupId>com.fushun.framework</groupId>
+        <version>2.1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>framword-sample-web-starter</artifactId>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fushun.framework</groupId>
+            <artifactId>framework-sample-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fushun.framework</groupId>
+            <artifactId>framework-sample-data-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fushun.framework</groupId>
+            <artifactId>framework-sample-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fushun.framework</groupId>
+            <artifactId>framework-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fushun.framework</groupId>
+            <artifactId>framework-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fushun.framework</groupId>
+            <artifactId>framework-dynamic-datasource</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <configuration>
+                    <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                    <metadataRepository>
+                        <enabled>true</enabled>
+                    </metadataRepository>
+                    <requiredVersion>23.1</requiredVersion>
+                    <buildArgs combine.children="append">
+                        <buildArg>
+                            --initialize-at-build-time=cn.hutool.core.convert.BasicType
+                            --initialize-at-build-time=cn.hutool.core.io.FileUtil
+                            --initialize-at-build-time=cn.hutool.core.util.ClassLoaderUtil
+                            --initialize-at-build-time=cn.hutool.core.util.CharsetUtil
+                            --initialize-at-build-time=kotlin.annotation.AnnotationTarget
+                            --initialize-at-build-time=kotlin.annotation.AnnotationRetention
+                            --initialize-at-build-time=kotlin.annotation.AnnotationRetention
+                            --initialize-at-build-time=ch.qos.logback.core.CoreConstants
+                            --initialize-at-build-time=com.fushun.framework.sample.web.starter.controller.RedisController,com.fasterxml.jackson.databind.introspect.POJOPropertyBuilder,ch.qos.logback.core.status.InfoStatus,com.fasterxml.jackson.databind.type.TypeBase,com.fasterxml.jackson.databind.MappingJsonFactory,com.fasterxml.jackson.databind.type.SimpleType,com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver,com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer,org.springframework.core.annotation.MergedAnnotations$Search,com.fasterxml.jackson.core.JsonGenerator,org.apache.commons.logging.LogAdapter,com.fasterxml.jackson.databind.type.MapType,com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase,com.fasterxml.jackson.core.util.VersionUtil,com.fasterxml.jackson.datatype.jsr310.deser.JSR310StringParsableDeserializer,com.fasterxml.jackson.databind.ObjectMapper,com.fasterxml.jackson.core.JsonFactory,org.springframework.core.annotation.AnnotationFilter$2,com.fasterxml.jackson.core.io.JsonStringEncoder,com.fasterxml.jackson.databind.PropertyMetadata,org.springframework.core.annotation.RepeatableContainers$StandardRepeatableContainers,org.springframework.core.annotation.AttributeMethods,com.fasterxml.jackson.core.json.JsonGeneratorImpl,org.springframework.core.annotation.PackagesAnnotationFilter,com.fasterxml.jackson.databind.type.ResolvedRecursiveType,org.springframework.core.annotation.TypeMappedAnnotation,com.fasterxml.jackson.datatype.jsr310.deser.key.MonthDayKeyDeserializer,com.fasterxml.jackson.datatype.jsr310.deser.OffsetTimeDeserializer,ch.qos.logback.classic.Level,com.fasterxml.jackson.core.Base64Variants,com.fushun.framework.base.SpringContextUtil,com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer,com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase,ch.qos.logback.classic.Logger,org.springframework.util.ReflectionUtils,com.fushun.framework.sample.web.starter.controller.TestController,com.fasterxml.jackson.databind.ser.BeanSerializerFactory,com.fushun.framework.security.controller.CaptchaController,com.fasterxml.jackson.core.util.BufferRecyclers,com.fasterxml.jackson.databind.cfg.MapperConfig,org.springframework.core.annotation.AnnotationFilter,com.fasterxml.jackson.core.json.WriterBasedJsonGenerator,com.fasterxml.jackson.databind.introspect.AnnotatedClass,com.fasterxml.jackson.databind.introspect.POJOPropertyBuilder$6,com.fasterxml.jackson.datatype.jsr310.deser.DurationDeserializer,com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer,org.springframework.core.annotation.TypeMappedAnnotations,org.springframework.util.PropertyPlaceholderHelper,com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector,org.apache.commons.logging.LogAdapter$Slf4jLocationAwareLog,com.fasterxml.jackson.datatype.jsr310.PackageVersion,org.springframework.core.io.support.PathMatchingResourcePatternResolver,com.fushun.framework.util.json.JsonMapper,com.fushun.framework.sample.mybatis.service.impl.SysUser4ServiceImpl,com.fasterxml.jackson.databind.util.internal.PrivateMaxEntriesMap,org.slf4j.LoggerFactory,com.fasterxml.jackson.datatype.jsr310.deser.key.YearMonthKeyDeserializer,com.fasterxml.jackson.annotation.JsonSetter$Value,com.fasterxml.jackson.databind.introspect.VisibilityChecker$Std,com.fasterxml.jackson.datatype.jsr310.deser.MonthDayDeserializer,com.fasterxml.jackson.core.io.CharTypes,com.fasterxml.jackson.databind.type.CollectionType,org.springframework.core.annotation.AnnotationUtils,com.fushun.framework.sample.mybatis.service.impl.User1ServiceImpl,com.fasterxml.jackson.databind.ser.std.NumberSerializers$FloatSerializer,ch.qos.logback.core.status.StatusBase,com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition,com.fasterxml.jackson.datatype.jsr310.deser.YearMonthDeserializer,com.fasterxml.jackson.databind.ser.BasicSerializerFactory,org.springframework.util.AntPathMatcher$AntPathStringMatcher,com.fasterxml.jackson.databind.cfg.MutableCoercionConfig,com.fasterxml.jackson.databind.type.IdentityEqualityType,com.fushun.framework.sample.mybatis.service.impl.SysUser2ServiceImpl,org.springframework.context.index.CandidateComponentsIndexLoader,com.fasterxml.jackson.databind.cfg.CoercionConfig,com.fasterxml.jackson.annotation.JsonFormat$Value,com.fasterxml.jackson.databind.ser.std.NumberSerializers$IntLikeSerializer,com.fasterxml.jackson.databind.util.ClassUtil,org.springframework.util.ConcurrentReferenceHashMap,com.fasterxml.jackson.databind.ext.Java7SupportImpl,com.fasterxml.jackson.core.io.SerializedString,com.fasterxml.jackson.databind.deser.std.StdDeserializer,com.fasterxml.jackson.databind.type.TypeBindings$TypeParamStash,org.springframework.core.annotation.RepeatableContainers,com.fasterxml.jackson.core.util.DefaultIndenter,com.fasterxml.jackson.databind.cfg.MapperConfigBase,com.fasterxml.jackson.databind.cfg.CoercionConfigs,com.fasterxml.jackson.core.base.GeneratorBase,com.fasterxml.jackson.databind.ext.Java7Support,com.fushun.framework.util.util.JsonUtil,com.fasterxml.jackson.databind.DeserializationConfig,com.fushun.framework.sample.mybatis.service.impl.SysUser3ServiceImpl,org.springframework.core.annotation.AnnotationsScanner,org.springframework.http.HttpStatus,com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer,com.fasterxml.jackson.databind.type.CollectionLikeType,ch.qos.logback.core.util.StatusPrinter,org.springframework.core.annotation.AnnotationFilter$1,com.fasterxml.jackson.databind.type.ArrayType,com.fasterxml.jackson.annotation.JsonAutoDetect$1,org.springframework.core.annotation.RepeatableContainers$NoRepeatableContainers,ch.qos.logback.core.CoreConstants,org.springframework.core.annotation.AnnotationTypeMappings,com.fushun.framework.util.util.DateUtil,com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer,com.fasterxml.jackson.databind.ser.std.UUIDSerializer,com.fushun.framework.sample.jpa.web.UserController,org.springframework.core.SpringProperties,org.springframework.core.NativeDetector,com.fasterxml.jackson.databind.type.TypeBindings,com.fasterxml.jackson.databind.introspect.BasicClassIntrospector,com.fasterxml.jackson.databind.ser.std.NumberSerializers$ShortSerializer,org.springframework.util.AntPathMatcher,com.fasterxml.jackson.databind.cfg.ContextAttributes$Impl,org.springframework.util.ClassUtils,com.fasterxml.jackson.databind.deser.BeanDeserializerFactory,com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer,com.fasterxml.jackson.databind.type.MapLikeType,com.fasterxml.jackson.datatype.jsr310.deser.YearDeserializer,com.fasterxml.jackson.annotation.JsonInclude$Value,org.springframework.core.annotation.AnnotationTypeMapping,com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer,com.fasterxml.jackson.databind.cfg.DatatypeFeatures$DefaultHolder,com.fasterxml.jackson.databind.cfg.BaseSettings,com.fasterxml.jackson.databind.type.TypeFactory,ch.qos.logback.core.util.Loader,com.fushun.framework.sample.security.admin.controller.AdminLoginController,com.fasterxml.jackson.databind.SerializationConfig,com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer,com.fasterxml.jackson.databind.util.StdDateFormat
+                        </buildArg>
+                        <buildArg>-H:+UnlockExperimentalVMOptions</buildArg>
+                        <buildArg>-H:+InlineBeforeAnalysis</buildArg>
+                        <buildArg>-H:DeadlockWatchdogInterval=10</buildArg>
+                        <buildArg>-H:+DeadlockWatchdogExitOnTimeout</buildArg>
+                        <buildArg>-H:+ReportExceptionStackTraces</buildArg>
+                        <buildArg>--enable-url-protocols=http</buildArg>
+                        <buildArg>--features=com.fushun.framework.sample.web.starter.config.LambdaRegistrationFeature</buildArg>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.fushun.framework.sample.web.starter.DemoApplication</mainClass>
+                    <image>
+                        <builder>paketobuildpacks/builder-jammy-full:0.3.379</builder>
+                        <runImage>paketobuildpacks/run-jammy-full:0.1.48</runImage>
+<!--                        <builder>paketobuildpacks/builder-jammy-tiny:0.0.225</builder>-->
+<!--                        <runImage>paketobuildpacks/run-jammy-tiny:0.2.41</runImage>-->
+                        <env>
+                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                            <BP_JVM_VERSION>21</BP_JVM_VERSION>
+                            <BP_SPRING_AOT_ENABLED>true</BP_SPRING_AOT_ENABLED>
+                            <BPL_SPRING_AOT_ENABLED>true</BPL_SPRING_AOT_ENABLED>
+                            <BP_JVM_BUILD_CACHE_ENABLED>true</BP_JVM_BUILD_CACHE_ENABLED>
+                            <BP_JVM_BUILD_CACHE_LAYER>true</BP_JVM_BUILD_CACHE_LAYER>
+                            <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                                -H:+AddAllCharsets
+                                -H:+InlineBeforeAnalysis
+                                -H:DeadlockWatchdogInterval=10
+                                -H:+DeadlockWatchdogExitOnTimeout
+                                -H:+ReportExceptionStackTraces
+                                -H:+UnlockExperimentalVMOptions
+                                <!-- https://docs.oracle.com/en/graalvm/enterprise/21/docs/reference-manual/native-image/URLProtocols/#supported-and-enabled-by-default -->
+                                --enable-http
+                                --enable-https
+                                --enable-url-protocols=http
+                                <!-- https://docs.oracle.com/en/graalvm/enterprise/21/docs/reference-manual/native-image/JCASecurityServices/#provider-registration -->
+                                -H:+TraceSecurityServices
+                                --features=com.fushun.framework.sample.web.starter.config.LambdaRegistrationFeature
+                                --initialize-at-build-time=ch.qos.logback.classic.Logger,com.fasterxml.jackson.databind.deser.BeanDeserializerFactory,com.fasterxml.jackson.datatype.jsr310.deser.key.YearMonthKeyDeserializer,com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver,org.springframework.core.annotation.AnnotationsScanner,com.fushun.framework.security.controller.CaptchaController,com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition,com.fushun.framework.sample.mybatis.service.impl.SysUser4ServiceImpl,org.springframework.util.AntPathMatcher,com.fasterxml.jackson.annotation.JsonSetter$Value,org.slf4j.LoggerFactory,com.fasterxml.jackson.databind.type.MapLikeType,com.fushun.framework.sample.mybatis.service.impl.User1ServiceImpl,org.springframework.core.annotation.AnnotationFilter$1,com.fasterxml.jackson.databind.type.ResolvedRecursiveType,com.fushun.framework.util.util.JsonUtil,com.fasterxml.jackson.databind.type.TypeBindings$TypeParamStash,com.fasterxml.jackson.core.util.BufferRecyclers,com.fasterxml.jackson.core.io.SerializedString,com.fasterxml.jackson.databind.cfg.DatatypeFeatures$DefaultHolder,com.fasterxml.jackson.core.JsonFactory,org.springframework.core.annotation.AnnotationUtils,com.fasterxml.jackson.databind.SerializationConfig,com.fasterxml.jackson.databind.introspect.AnnotatedClass,org.springframework.core.annotation.RepeatableContainers$NoRepeatableContainers,org.springframework.core.NativeDetector,com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector,com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase,com.fasterxml.jackson.databind.DeserializationConfig,org.springframework.core.annotation.AnnotationTypeMappings,com.fasterxml.jackson.databind.introspect.POJOPropertyBuilder,com.fasterxml.jackson.databind.type.MapType,com.fasterxml.jackson.core.Base64Variants,com.fasterxml.jackson.databind.type.TypeFactory,com.fasterxml.jackson.databind.ser.std.NumberSerializers$FloatSerializer,org.springframework.core.annotation.AttributeMethods,ch.qos.logback.core.util.StatusPrinter,com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer,com.fasterxml.jackson.databind.ser.BasicSerializerFactory,com.fasterxml.jackson.databind.type.IdentityEqualityType,com.fasterxml.jackson.databind.util.internal.PrivateMaxEntriesMap,org.springframework.core.annotation.RepeatableContainers$StandardRepeatableContainers,com.fasterxml.jackson.databind.type.ArrayType,com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer,org.springframework.core.annotation.RepeatableContainers,org.springframework.util.ClassUtils,com.fasterxml.jackson.core.io.JsonStringEncoder,com.fasterxml.jackson.databind.type.SimpleType,org.springframework.http.HttpStatus,com.fasterxml.jackson.databind.type.CollectionLikeType,ch.qos.logback.core.CoreConstants,com.fasterxml.jackson.databind.ser.std.NumberSerializers$IntLikeSerializer,com.fushun.framework.sample.mybatis.service.impl.SysUser2ServiceImpl,com.fushun.framework.util.util.DateUtil,org.springframework.util.ConcurrentReferenceHashMap,com.fasterxml.jackson.databind.cfg.MapperConfigBase,com.fasterxml.jackson.datatype.jsr310.PackageVersion,com.fasterxml.jackson.databind.cfg.BaseSettings,ch.qos.logback.core.status.StatusBase,com.fasterxml.jackson.databind.cfg.MapperConfig,org.springframework.core.annotation.AnnotationFilter,com.fasterxml.jackson.databind.ser.std.UUIDSerializer,com.fasterxml.jackson.databind.type.TypeBindings,com.fasterxml.jackson.core.util.VersionUtil,com.fasterxml.jackson.databind.MappingJsonFactory,org.springframework.util.AntPathMatcher$AntPathStringMatcher,com.fasterxml.jackson.datatype.jsr310.deser.key.MonthDayKeyDeserializer,com.fasterxml.jackson.databind.util.StdDateFormat,com.fasterxml.jackson.core.io.CharTypes,ch.qos.logback.core.status.InfoStatus,com.fushun.framework.base.SpringContextUtil,com.fushun.framework.sample.web.starter.controller.RedisController,org.springframework.util.ReflectionUtils,org.apache.commons.logging.LogAdapter$Slf4jLocationAwareLog,com.fasterxml.jackson.datatype.jsr310.deser.OffsetTimeDeserializer,com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer,com.fasterxml.jackson.datatype.jsr310.deser.DurationDeserializer,com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer,com.fasterxml.jackson.databind.type.CollectionType,com.fasterxml.jackson.annotation.JsonInclude$Value,com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer,com.fasterxml.jackson.databind.ext.Java7Support,com.fasterxml.jackson.databind.introspect.POJOPropertyBuilder$6,com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer,org.springframework.core.SpringProperties,org.springframework.context.index.CandidateComponentsIndexLoader,com.fasterxml.jackson.databind.PropertyMetadata,com.fasterxml.jackson.core.json.WriterBasedJsonGenerator,com.fasterxml.jackson.databind.util.ClassUtil,org.springframework.core.annotation.TypeMappedAnnotations,com.fasterxml.jackson.core.json.JsonGeneratorImpl,org.springframework.core.annotation.MergedAnnotations$Search,com.fasterxml.jackson.databind.cfg.CoercionConfig,com.fasterxml.jackson.datatype.jsr310.deser.YearDeserializer,ch.qos.logback.classic.Level,com.fasterxml.jackson.databind.introspect.VisibilityChecker$Std,com.fasterxml.jackson.databind.cfg.MutableCoercionConfig,com.fushun.framework.sample.mybatis.service.impl.SysUser3ServiceImpl,org.springframework.util.PropertyPlaceholderHelper,com.fushun.framework.util.json.JsonMapper,com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer,com.fasterxml.jackson.databind.ext.Java7SupportImpl,com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase,com.fasterxml.jackson.databind.deser.std.StdDeserializer,com.fasterxml.jackson.databind.ser.std.NumberSerializers$ShortSerializer,org.springframework.core.io.support.PathMatchingResourcePatternResolver,com.fasterxml.jackson.core.util.DefaultIndenter,com.fasterxml.jackson.datatype.jsr310.deser.YearMonthDeserializer,com.fasterxml.jackson.databind.introspect.BasicClassIntrospector,com.fasterxml.jackson.databind.ObjectMapper,com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer,com.fasterxml.jackson.databind.cfg.ContextAttributes$Impl,com.fasterxml.jackson.datatype.jsr310.deser.MonthDayDeserializer,org.springframework.core.annotation.TypeMappedAnnotation,ch.qos.logback.core.util.Loader,com.fasterxml.jackson.core.base.GeneratorBase,com.fasterxml.jackson.databind.cfg.CoercionConfigs,com.fasterxml.jackson.databind.type.TypeBase,org.apache.commons.logging.LogAdapter,org.springframework.core.annotation.AnnotationFilter$2,com.fasterxml.jackson.core.JsonGenerator,com.fasterxml.jackson.annotation.JsonFormat$Value,com.fushun.framework.sample.web.starter.controller.TestController,org.springframework.core.annotation.PackagesAnnotationFilter,com.fushun.framework.sample.jpa.web.UserController,org.springframework.core.annotation.AnnotationTypeMapping,com.fasterxml.jackson.annotation.JsonAutoDetect$1,com.fasterxml.jackson.datatype.jsr310.deser.JSR310StringParsableDeserializer,com.fasterxml.jackson.databind.ser.BeanSerializerFactory,com.fushun.framework.sample.security.admin.controller.AdminLoginController</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                        </env>
+<!--                        <pullPolicy>IF_NOT_PRESENT</pullPolicy> &lt;!&ndash; 如果本地不存在，则拉取镜像 &ndash;&gt;-->
+<!--                        <name>${project.artifactId}:${project.version}</name> &lt;!&ndash; 自定义镜像名称 &ndash;&gt;-->
+                    </image>
+<!--                    <applicationDirectory>${project.build.outputDirectory}</applicationDirectory>-->
+<!--                    <cleanCache>false</cleanCache> &lt;!&ndash; 保持缓存，不在每次构建前清理 &ndash;&gt;-->
+<!--                    <excludeDevtools>true</excludeDevtools> &lt;!&ndash; 排除开发工具 &ndash;&gt;-->
+<!--                    <finalName>${project.build.finalName}</finalName>-->
+<!--                    <publish>false</publish> &lt;!&ndash; 不自动发布生成的镜像 &ndash;&gt;-->
+<!--                    <skip>false</skip> &lt;!&ndash; 不跳过构建过程 &ndash;&gt;-->
+<!--                    <sourceDirectory>${project.build.directory}</sourceDirectory>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
